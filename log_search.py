@@ -25,30 +25,30 @@ class File_date:
             while True:
                 ip_line = []
                 list_tmp = f.readline()
-                list = list_tmp.split(' ')
-                list[:] = [x for x in list if x != '']
-                print(list)
-                date = list[0]
-                time = list[1]
-                ip = list[2]
-                size = list[4]
-                url = list[6]
-                session_line = {'date':date, 'time':time, 'size':size, 'url':url}
-                if ip in self.dict.keys():
-                    tmp_list = self.dict[ip]
-                    tmp_list.append(session_line)
-                    self.dict[ip].append(tmp_list)
+                if list_tmp is not '':
+                    list = list_tmp.split(' ')
+                    list[:] = [x for x in list if x != '']
+                    date = list[0]
+                    time = list[1]
+                    ip = list[2]
+                    size = list[4]
+                    url = list[6]
+                    session_line = {'date':date, 'time':time, 'size':size, 'url':url}
+                    if ip in self.dict.keys():
+                        tmp_list = self.dict[ip]
+                        tmp_list.append(session_line)
+                        self.dict[ip] = tmp_list
+                    else:
+                        ip_line.append(session_line)
+                        self.dict[ip] = ip_line
                 else:
-                    ip_line.append(session_line)
-                    self.dict[ip] = ip_line
-#                print(session_line)
-#                self.dict[ip] = ip_line
-                session_line = []
-        return self
+                    return self
+
 
     def __exit__(self, exc_type, exc_val, exc_tp):
         pass
 
 
 with File_date('test.log') as my_dict:
-    print(my_dict.dict)
+    print('Bam!')
+    print(my_dict.dict.get('10.254.55.18'))
