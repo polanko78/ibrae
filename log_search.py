@@ -8,11 +8,6 @@ import time
 # список переводим в словарь
 
 class File_date:
-    # date = None
-    # time = None
-    # ip = None
-    # size = None
-    # url = None
     dict = {}
 
     def __init__(self, file_path):
@@ -36,7 +31,6 @@ class File_date:
                     session_line = {'date':date, 'time':time, 'size':size, 'url':url}
                     if ip in self.dict.keys():
                         self.dict[ip].append(session_line)
-                        print(self.dict[ip])
                     else:
                         ip_line.append(session_line)
                         self.dict[ip] = ip_line
@@ -47,7 +41,26 @@ class File_date:
     def __exit__(self, exc_type, exc_val, exc_tp):
         pass
 
+    def ip(self):
+        ip = input('IP? :')
+        if ip in self.dict.keys():
+            for x in self.dict[ip]:
+                print('Дата: {}  Время в работе: {}  Объем данных: {}  URL : {}'.format(time.ctime(float(x['date'])), x['time'], x['size'], x['url']))
+#            print(self.dict[ip])
 
+
+def inter(my_dict):
+    command = None
+    while True:
+        command = input('Сортировка по IP :')
+        if command == 'ip':
+            my_dict.ip()
+
+
+#if __name__ == 'main':
 with File_date('test.log') as my_dict:
-    print('Bam!')
-    print(my_dict.dict.get('10.254.55.18'))
+    inter(my_dict)
+
+
+#    print('Bam!')
+#    print(my_dict.dict.get('10.254.55.18'))
