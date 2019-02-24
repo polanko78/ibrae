@@ -35,9 +35,8 @@ class File_date:
                     url = list[6]
                     session_line = {'date':date, 'time':time, 'size':size, 'url':url}
                     if ip in self.dict.keys():
-                        tmp_list = self.dict[ip]
-                        tmp_list.append(session_line)
-                        self.dict[ip] = tmp_list
+                        self.dict[ip].append(session_line)
+                        print(self.dict[ip])
                     else:
                         ip_line.append(session_line)
                         self.dict[ip] = ip_line
