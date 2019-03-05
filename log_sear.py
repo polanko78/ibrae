@@ -13,7 +13,6 @@ from operator import itemgetter
 def sort(dict):
     #    ip = input('IP? :')
     count = 0
-    t = []
     dom_list = []
     d_l = []
     spisok = []
@@ -21,9 +20,7 @@ def sort(dict):
     top10ip = []
     top10dom = []
     dom_check_list = ['.ru/', '.com/', '.org/', '.net/']
-    #    filename = 'top.log'
-    #    with open(filename, 'w', encoding='UTF-8') as nf:
-    #        nf.write('TOP10 IP \n')
+
     for ip in dict.keys():
         count = len(dict[ip])
         spisok.append([ip, count])
@@ -49,7 +46,9 @@ def sort(dict):
 
 
 
-
+    #    filename = 'top.log'
+    #    with open(filename, 'w', encoding='UTF-8') as nf:
+    #        nf.write('TOP10 IP \n')
 #        if ip in dict.keys():
 #            for x in dict[ip]:
 #                nf.write('Дата: {}  Время в работе: {}  Объем данных: {}  URL : {}'.format(time.ctime(float(x['date'])), x['time'], x['size'], x['url'] + '\n'))
