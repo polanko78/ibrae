@@ -7,14 +7,16 @@ def make_url(url):
     d = []
     for y in dom_check_list:
         if y in url:
-            t = url.split(sep='/')
+            t = url.split(sep = '/')
             d.append(t[2])
     for y in d:
         t = y.split(sep = '.')
         dom_name = (t[-2] + '.' + t[-1])
         return dom_name
 
+
 def sort(big_list):
+    m = d = ''
     top10dom = []
     top10ip = []
     domens = []
@@ -29,6 +31,15 @@ def sort(big_list):
     top10ip = sorted(ip_list, key = lambda x: ip_list.count(x), reverse = True)
     pprint(top10dom[0:10])
     pprint(top10ip[0:10])
+    # for x in big_list:
+    #     if m != x[0][1]:
+    #         if d != x[0][2]:
+    #             m = x[0][1]
+    #             d = x[0][2]
+    #     if '200' in x[4]:
+    #         sort_list_size = [m + ' ' + d, x[5], x[2]]
+
+
 
 
 
@@ -43,7 +54,8 @@ with open('test.log') as f:
             list = list_tmp.split(' ')
             list[:] = [x for x in list if x != '']
             ip = list[2]
-            date = list[0]
+            date = time.ctime(float(list[0]))
+            d = date.split(' ')
             t = list[1]
             size = list[4]
             url = list[6]
@@ -52,7 +64,7 @@ with open('test.log') as f:
             dom_name = make_url(url)
             if dom_name == None:
                 dom_name = ''
-            session_line = [list[0], list[1], list[4], dom_name, list[3], list[5], list[2]]
+            session_line = [d, list[1], list[4], dom_name, list[3], list[5], list[2]]
             big_list.append(session_line)
         else:
             x = False
@@ -61,7 +73,25 @@ with open('test.log') as f:
 sort(big_list)
 print(session_line)
 #for d in big_list:
+ipx = day = m = d = ''
+x_list = []
+for x in big_list:
+    if m != x[0][1]:
+        if d != x[0][2]:
+            m = x[0][1]
+            d = x[0][2]
+    if '200' in x[4]:
+        sort_list_size = [m + ' ' + d, x[6], x[2]]
+        x_list.append(sort_list_size)
+for x in x_list:
+    if day !=x[0]:
+        day = x[0]
+        if x[0] == day:
 
-d = time.ctime(float(session_line[0]))
-print(d)
-print(type(d))
+    # if ipx != x[1]
+    #     ipx = x[1]
+    # count_size += int(x[2])
+
+
+
+pprint(x_list)
